@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <algorithm>
 using namespace std;
 
 struct Fano
@@ -67,15 +69,24 @@ bool compare(Fano A,Fano B)
 int main()
 {
     int n,j;
+    double sum;
     cout<<"Enter the no. of symbols: ";
     cin>>n;
     cout<<endl;
-    for(char i='A';i<('A'+n);i++)
-    {
-        cout<<"Enter Probability of "<<i<<": ";
-        cin>>F[int(i-'A')].p;
-        F[int(i-'A')].sym=i;
-    }
+    do{
+            sum=0;
+            for(char i='A';i<('A'+n);i++)
+            {
+                cout<<"Enter Probability of "<<i<<": ";
+                cin>>F[int(i-'A')].p;
+                F[int(i-'A')].sym=i;
+            }
+            for(j=0;j<n;j++)
+                sum=sum+F[j].p;
+            if(sum!=1)
+                cout<<"\nThe entered probabilities are not correct.\n\nEnter again:\n";
+
+    }while(sum!=1);
     sort(F,F+n,compare);
 
     shanon(0,n);
